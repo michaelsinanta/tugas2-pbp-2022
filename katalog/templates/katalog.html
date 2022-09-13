@@ -5,10 +5,10 @@
   <h1>Lab 1 Assignment PBP/PBD</h1>
 
   <h5>Name: </h5>
-  <b>{{nama}}</b>
+  <p>{{nama}}</p>
 
   <h5>Student ID: </h5>
-  <b>{{studentId}}</b>
+  <p>{{studentId}}</p>
 
   <table>
     <tr>
@@ -22,12 +22,12 @@
     {% comment %} Add the data below this line {% endcomment %}
     {% for katalog in list_katalog %}
       <tr>
-          <th>{{katalog.item_name}}</th>
-          <th>{{katalog.item_price}}</th>
-          <th>{{katalog.description}}</th>
-          <th>{{katalog.item_stock}}</th>
-          <th>{{katalog.rating}}</th>
-          <th>{{katalog.item_url}}</th>
+          <td>{{katalog.item_name}}</td>
+          <td>{{katalog.item_price}}</td>
+          <td>{{katalog.description}}</td>
+          <td>{{katalog.item_stock}}</td>
+          <td>{{katalog.rating}}</td>
+          <td>{{katalog.item_url}}</td>
       </tr>
     {% endfor %}
   </table>
