@@ -25,9 +25,10 @@ Kita tetap bisa membuat aplikasi web berbasis Django walaupun tidak memakai virt
 1. Django-app sudah tersedia yaitu bernama katalog sehingga kita bisa langsung dapat menggunakannya. Pada settings.py di folder project_django, aplikasi katalog juga sudah terdaftar dalam variabel INSTALLED_APPS.
 
 2. CatalogItem model sudah tersedia di models.py. Selanjutnya, kita membuat fungsi show_katalog pada views.py. Saya melengkapi dictionary show_katalog dengan nama dan NPM saya.
-        from django.shortcuts import render
-        from katalog.models import CatalogItem
 
+        from django.shortcuts import render 
+        from katalog.models import CatalogItem
+        
         def show_katalog(request):
             data_katalog = CatalogItem.objects.all()
             context = {
@@ -42,7 +43,7 @@ Kita tetap bisa membuat aplikasi web berbasis Django walaupun tidak memakai virt
         path('katalog/', include('katalog.urls')),
 
 **II. Langkah 2**\
-Melakukan routing terhadap fungsi views yang telah kamu buat sehingga nantinya halaman HTML dapat ditampilkan lewat browser dengan menambahkan nama aplikasi dan urlpatterns dari urls.py pada folder katalog sebagai berikut.\
+Melakukan routing terhadap fungsi views yang telah kamu buat sehingga nantinya halaman HTML dapat ditampilkan lewat browser dengan menambahkan nama aplikasi dan urlpatterns dari urls.py pada folder katalog sebagai berikut :
     
         from katalog.views import show_katalog
 
