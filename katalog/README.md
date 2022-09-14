@@ -1,7 +1,7 @@
 # Tugas 2: Pengenalan Aplikasi Django dan Models View Template (MVT) pada Django
-Nama    : Michael Christlambert Sinanta
-NPM     : 2106750414
-Kelas   : PBP C
+Nama    : Michael Christlambert Sinanta\
+NPM     : 2106750414\
+Kelas   : PBP C\
 Link Repository : https://django-project-tugas2-2022.herokuapp.com/
 ## Diagram
 Berikut adalah bagan yang berisi request client ke web aplikasi berbasis Django:
