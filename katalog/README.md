@@ -42,14 +42,15 @@ Kita tetap bisa membuat aplikasi web berbasis Django walaupun tidak memakai virt
         path('katalog/', include('katalog.urls')),
 
 **II. Langkah 2**\
-Melakukan routing terhadap fungsi views yang telah kamu buat sehingga nantinya halaman HTML dapat ditampilkan lewat browser dengan menambahkan nama aplikasi dan urlpatterns dari urls.py pada folder katalog sebagai berikut.
-    from katalog.views import show_katalog
+Melakukan routing terhadap fungsi views yang telah kamu buat sehingga nantinya halaman HTML dapat ditampilkan lewat browser dengan menambahkan nama aplikasi dan urlpatterns dari urls.py pada folder katalog sebagai berikut.\
     
-    app_name = 'katalog'
-    
-    urlpatterns = [
-    path('', show_katalog, name='show_katalog'),
-    ]
+        from katalog.views import show_katalog
+
+        app_name = 'katalog'
+
+        urlpatterns = [
+            path('', show_katalog, name='show_katalog'),
+        ]
 
 **III. Langkah 3**\
 Mengatur berkas katalog.html dan memetakan data yang diteruskan dari fungsi show_katalog serta mengiterasi list_katalog dengan template sebagai berikut :
