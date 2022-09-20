@@ -1,0 +1,134 @@
+[
+    {
+        "model":"mywatchlist.mywatchlist",
+        "pk":1,
+        "fields":{
+            "watched": false,
+            "title": "Top Gun: Maverick",
+            "rating": 2,
+            "release_date": "2022-05-27",
+            "review": "Top Gun: Maverick represents the best of what blockbuster filmmaking can be, brilliantly blending spectacle with sentiment to exhilarating effect."
+        }
+    },
+    {
+        "model":"mywatchlist.mywatchlist",
+        "pk":2,
+        "fields":{
+            "watched": true,
+            "title": "Everything Everywhere All at Once",
+            "rating": 5,
+            "release_date": "2022-06-07",
+            "review": "Exhilarating, funny and moving, their film is also messy, overstuffed and a trifle exhausting."
+        }
+    },
+    {
+        "model":"mywatchlist.mywatchlist",
+        "pk":3,
+        "fields":{
+            "watched": true,
+            "title": "Despicable Me 3",
+            "rating": 3,
+            "release_date": "2016-10-04",
+            "review": "Even though the story is fairly convoluted, it's worth taking your kids to see. There are laughs abounding."
+        }
+    },
+    {
+        "model":"mywatchlist.mywatchlist",
+        "pk":4,
+        "fields":{
+            "watched": true,
+            "title": "Doctor Strange in the Multiverse of Madness",
+            "rating": 3,
+            "release_date": "2016-05-06",
+            "review": "It's impressive and over-the-top, even if some scenes raise an unintentional chuckle. It’s a Raimi film, after all, and even Disney can't fully restrain him."
+        }
+    },
+    {
+        "model":"mywatchlist.mywatchlist",
+        "pk":5,
+        "fields":{
+            "watched": false,
+            "title": "Justice League",
+            "rating": 3,
+            "release_date": "2017-11-17",
+            "review": "The action is exciting at times but the outcomes are predictable. Indeed, this often has the feel of a set-up movie, one made to kick off a series."
+        }
+    },
+    {
+        "model":"mywatchlist.mywatchlist",
+        "pk":6,
+        "fields":{
+            "watched": false,
+            "title": "Finding Dory",
+            "rating": 4,
+            "release_date": "2016-06-17",
+            "review": "Before a somewhat cluttered conclusion, Finding Dory is a truly touching film, graceful in its exploration of identity, family, and the way they intersect."
+        }
+    },
+    {
+        "model":"mywatchlist.mywatchlist",
+        "pk":7,
+        "fields":{
+            "watched": true,
+            "title": "Dune",
+            "rating": 5,
+            "release_date": "2021-09-22",
+            "review": "I really loved Dune. The action set pieces were phenomenal, but the focus was almost always on the characters."
+        }
+    },
+    {
+        "model":"mywatchlist.mywatchlist",
+        "pk":8,
+        "fields":{
+            "watched": true,
+            "title": "Spider-Man: No Way Home",
+            "rating": 5,
+            "release_date": "2021-12-17",
+            "review": "To my surprise, it's an entertaining sequel that hooks me, without reaching paroxysm, when it delivers the nostalgia-scented pyrotechnics of the friendly neighborhood spider that faces maturity."
+        }
+    },
+    {
+        "model":"mywatchlist.mywatchlist",
+        "pk":9,
+        "fields":{
+            "watched": false,
+            "title": "Raya and the Last Dragon",
+            "rating": 3,
+            "release_date": "2021-05-05",
+            "review": "The message is that you have to put aside differences and learn to trust and find common ground. It feels like it's hitting the right notes, with spectacular visuals."
+        }
+    },
+    {
+        "model":"mywatchlist.mywatchlist",
+        "pk":10,
+        "fields":{
+            "watched": false,
+            "title": "The Velvet Underground",
+            "rating": 2,
+            "release_date": "2021-08-15",
+            "review": "The Velvet Underground offers an interesting look at the band and its era that will, for the fans, at least, be essential viewing."
+        }
+    },
+    {
+        "model":"mywatchlist.mywatchlist",
+        "pk":11,
+        "fields":{
+            "watched": true,
+            "title": "To All the Boys I've Loved Before",
+            "rating": 2,
+            "release_date": "2018-07-17",
+            "review": "It's a stylish pastel-tinted confection of a movie, one that knows every single one of the romantic tropes it's working with backwards and forwards, and loves them with all its pure and wholesome heart."
+        }
+    },
+    {
+        "model":"mywatchlist.mywatchlist",
+        "pk":12,
+        "fields":{
+            "watched": true,
+            "title": "Knives Out",
+            "rating": 5,
+            "release_date": "2020-05-12",
+            "review": "Knives Outis never, ever dull and offers the kind of classy entertainment we could use more of on the big screen. And I have a feeling we'll see more of Daniel Craig's colorful character down the road."
+        }
+    }
+]
