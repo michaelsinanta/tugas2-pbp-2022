@@ -143,7 +143,7 @@ Pada views.py, saya menambahkan function show_json untuk menampilkan request pad
 - http://localhost:8000/mywatchlist/xml untuk mengakses mywatchlist dalam format XML 
 - http://localhost:8000/mywatchlist/json untuk mengakses mywatchlist dalam format JSON 
 Caranya adalah pada urls.py, saya menambahkan urlpatterns sebagai berikut :
-```shell
+```python
     urlpatterns = [
         …
         path('html/', show_html, name='show_html'),
@@ -153,4 +153,12 @@ Caranya adalah pada urls.py, saya menambahkan urlpatterns sebagai berikut :
     ]
  ```
 12. Selanjutnya, saya memanggil command git add ., git commit -m “pesan”, dan git push sehingga repositori saya dapat ter-update. Oleh karena pada tugas 2 kemarin saya sudah men-deploy websitenya, secara otomatis aplikasi mywatchlist dapat diakses menggunakan link deploy tugas 2 yang lalu. Namun, saya menambahkan pada web https://dashboard.heroku.com/apps/django-project-tugas2-2022 dengan memberikan command pada run console berupa perintah python manage.py loaddata initial_mywatchlist_data.json untuk memasukkan data tersebut ke dalam database Django pada link heroku saya.
+
+### Screenshot Postman dari tiga URL
+1. HTML ```[GET] http://localhost:8000/mywatchlist/html/```
+![HTML](https://user-images.githubusercontent.com/97111982/191467111-3e2a81a8-1485-4267-8aa0-9268b5cfa906.png)
+2. XML ```[GET] http://localhost:8000/mywatchlist/xml/```
+![XML](https://user-images.githubusercontent.com/97111982/191466271-e136cc25-c729-40c4-9dc1-b00dd4ec7725.png)
+3. JSON ```[GET] http://localhost:8000/mywatchlist/json/```
+![JSON](https://user-images.githubusercontent.com/97111982/191467254-d6c33d50-dad6-488c-b2cd-1bbea8f1f21b.png)
 <br>
