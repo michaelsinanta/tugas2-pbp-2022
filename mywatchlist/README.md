@@ -15,11 +15,14 @@ Alasan kita memerlukan data delivery dalam pengimplementasian platform adalah ka
 ### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas.
 1. Membuat sebuah django-app bernama mywatchlist dengan perintah python manage.py startapp mywatchlist.
 2. Membuka settings.py di folder project_django dan menambahkan aplikasi mywatchlist ke dalam variabel INSTALLED_APPS untuk mendaftarkan django-app ke dalam proyek Django, sebagai berikut:
+```python
     INSTALLED_APPS = [
     ..., 
-    'mywatchlist’', 
+    'mywatchlist', 
     ]
+```
 3. Menambahkan path mywatchlist sehingga pengguna dapat mengakses http://localhost:8000/mywatchlist dengan membuat sebuah berkas di dalam folder aplikasi mywatchlist bernama urls.py untuk melakukan routing terhadap fungsi views yang telah kamu buat sehingga nantinya halaman HTML dapat ditampilkan lewat browser. Isi dari urls.py tersebut adalah sebagai berikut:
+```python
     from django.urls import path
     from mywatchlist.views import show_mywatchlist
 
@@ -28,9 +31,13 @@ Alasan kita memerlukan data delivery dalam pengimplementasian platform adalah ka
     urlpatterns = [
     path('', show_mywatchlist, name='show_mywatchlist'),
     ]
+```
 4. Mendaftarkan aplikasi mywatchlist ke dalam urls.py yang ada pada folder project_django dengan menambahkan potongan kode berikut pada variabel urlpatterns.
+```python
     path('mywatchlist/', include('mywatchlist.urls')),
+```
 5. Membuat sebuah model MyWatchList yang memiliki atribut watched, titile, rating, release_date, dan review. Pertama, saya membuka file models.py yang ada di folder mywatchlist dan menambahkan potongan kode berikut:
+```python
     from django.db import models 
     from django.core.validators import MaxValueValidator, MinValueValidator 
 
@@ -40,13 +47,15 @@ Alasan kita memerlukan data delivery dalam pengimplementasian platform adalah ka
     rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)]) 
     release_date = models.DateField() 
     review = models.TextField() 
+```
 6. Menjalankan perintah python manage.py makemigrations untuk mempersiapkan migrasi skema model ke dalam database Django lokal. 
 7. Menjalankan perintah python manage.py migrate untuk menerapkan skema model yang telah dibuat ke dalam database Django lokal.
 8. Menambahkan minimal 10 data untuk objek MyWatchList dengan membuat sebuah folder bernama fixtures di dalam folder aplikasi mywatchlist dan membuat sebuah berkas bernama initial_mywatchlist_data.json yang berisi 10 data tersebut.
 9. Menjalankan perintah python manage.py loaddata initial_mywatchlist_data.json untuk memasukkan data tersebut ke dalam database Django lokal.
 10. Mengimplementasikan sebuah fitur untuk menyajikan data yang telah dibuat sebelumnya dalam tiga format: 
 * HTML
-Membuat folder bernama templates di dalam folder aplikasi mywatchlist dan membuat berkas bernama mywatchlist.html yang isinya sebagai berikut :
+Membuat folder bernama templates di dalam folder aplikasi mywatchlist dan membuat berkas bernama mywatchlist.html yang isinya sebagai berikut:
+```python
     {% extends 'base.html' %}
     
     {% block content %}
@@ -83,7 +92,9 @@ Membuat folder bernama templates di dalam folder aplikasi mywatchlist dan membua
     </table>
     
     {% endblock content %}
+```
 Selanjutnya, pada views.py, saya menambahkan function show_html untuk menampilkan request pada website dengan menampilkan mywatchlist.html tersebut sebagai berikut: 
+```python
 def show_html(request):
    data_mywatchlist = MyWatchList.objects.all()
   
@@ -109,24 +120,30 @@ def show_html(request):
        'fiturPesan' : informasiPesan,
    }
    return render(request, "mywatchlist.html", context)
+```
 Saya juga menerapkan fitur yang menampilkan pesan dengan aturan sebagai berikut: 
 - Jika jumlah film yang sudah ditonton lebih banyak atau sama dengan jumlah film yang belum ditonton, tampilkan pesan "Selamat, kamu sudah banyak menonton!" dalam bentuk HTML 
 - Jika jumlah film yang belum ditonton lebih banyak dari jumlah film yang sudah ditonton, tampilkan pesan "Wah, kamu masih sedikit menonton!" dalam bentuk HTML
 * XML
 Pada views.py, saya menambahkan function show_xml untuk menampilkan request pada website dengan menampilkan data dengan format XML tersebut sebagai berikut: 
+```python
     def show_xml(request):
         data_mywatchlist = MyWatchList.objects.all()
         return HttpResponse(serializers.serialize("xml", data_mywatchlist), content_type="application/xml")
+```
 * JSON
 Pada views.py, saya menambahkan function show_json untuk menampilkan request pada website dengan menampilkan data dengan format JSON tersebut sebagai berikut: 
+```python
     def show_json(request):
         data_mywatchlist = MyWatchList.objects.all()
         return HttpResponse(serializers.serialize("json", data_mywatchlist), content_type="application/json")
+```
 11. Membuat routing sehingga data di atas dapat diakses melalui URL:
 - http://localhost:8000/mywatchlist/html untuk mengakses mywatchlist dalam format HTML 
 - http://localhost:8000/mywatchlist/xml untuk mengakses mywatchlist dalam format XML 
 - http://localhost:8000/mywatchlist/json untuk mengakses mywatchlist dalam format JSON 
 Caranya adalah pada urls.py, saya menambahkan urlpatterns sebagai berikut :
+```shell
     urlpatterns = [
         …
         path('html/', show_html, name='show_html'),
@@ -134,5 +151,6 @@ Caranya adalah pada urls.py, saya menambahkan urlpatterns sebagai berikut :
         path('json/', show_json, name='show_json'),
         …
     ]
+ ```
 12. Selanjutnya, saya memanggil command git add ., git commit -m “pesan”, dan git push sehingga repositori saya dapat ter-update. Oleh karena pada tugas 2 kemarin saya sudah men-deploy websitenya, secara otomatis aplikasi mywatchlist dapat diakses menggunakan link deploy tugas 2 yang lalu. Namun, saya menambahkan pada web https://dashboard.heroku.com/apps/django-project-tugas2-2022 dengan memberikan command pada run console berupa perintah python manage.py loaddata initial_mywatchlist_data.json untuk memasukkan data tersebut ke dalam database Django pada link heroku saya.
 <br>
