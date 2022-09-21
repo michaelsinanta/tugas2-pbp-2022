@@ -24,7 +24,7 @@ def show_html(request):
         else:
             notWatchedMovie += 1
     
-    if (watchedMovie > notWatchedMovie):
+    if (watchedMovie >= notWatchedMovie):
         informasiPesan = "Selamat, kamu sudah banyak menonton!"
     else :
         informasiPesan = "Wah, kamu masih sedikit menonton!"
