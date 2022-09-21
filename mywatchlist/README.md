@@ -152,7 +152,12 @@ Caranya adalah pada urls.py, saya menambahkan urlpatterns sebagai berikut :
         …
     ]
  ```
-12. Selanjutnya, saya memanggil command git add ., git commit -m “pesan”, dan git push sehingga repositori saya dapat ter-update. Oleh karena pada tugas 2 kemarin saya sudah men-deploy websitenya, secara otomatis aplikasi mywatchlist dapat diakses menggunakan link deploy tugas 2 yang lalu. Namun, saya menambahkan pada web https://dashboard.heroku.com/apps/django-project-tugas2-2022 dengan memberikan command pada run console berupa perintah python manage.py loaddata initial_mywatchlist_data.json untuk memasukkan data tersebut ke dalam database Django pada link heroku saya.
+12. Menambahkan perintah release pada Procfile sebagai berikut :
+```python
+    release: sh -c 'python manage.py migrate && python manage.py loaddata initial_catalog_data.json && python manage.py loaddata initial_mywatchlist_data.json'
+```
+
+13. Selanjutnya, saya memanggil command git add ., git commit -m “pesan”, dan git push sehingga repositori saya dapat ter-update. Oleh karena pada tugas 2 kemarin saya sudah men-deploy websitenya, secara otomatis aplikasi mywatchlist dapat diakses menggunakan link deploy tugas 2 yang lalu. 
 
 ### Screenshot Postman dari tiga URL
 1. HTML ```[GET] http://localhost:8000/mywatchlist/html/```
