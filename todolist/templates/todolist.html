@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <h1>Tugas 4: Pengimplementasian Form dan Autentikasi Menggunakan Django</h1>
+    <h2>Welcome, {{username}}</h2>
+    <table border="1">
+        <tr>
+            <th>Tanggal Pembuatan</th>
+            <th>Judul</th>
+            <th>Deskripsi</th>
+            <th>Status Pengerjaan</th>
+            <th>Ubah Status</th>
+            <th>Hapus</th>
+        </tr>
+        {% for todo in list_todolist %}
+        <tr>
+            <td>{{todo.date}}</td>
+            <td>{{todo.title}}</td>
+            <td>{{todo.description}}</td>
+            <td>{{todo.is_finished}}</td>
+            <td><a href="{% url 'todolist:toggle_status' todo.id %}">Ubah</a></td>
+            <td><a href="{% url 'todolist:delete_task' todo.id %}">Hapus</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <button><a href="{% url 'todolist:create_task' %}">Tambah Task Baru</a></button>
+    <button><a href="{% url 'todolist:logout_user' %}">Logout</a></button>
+</div>
+
+{% endblock content %}

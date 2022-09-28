@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Tugas 4: Pengimplementasian Form dan Autentikasi Menggunakan Django</h1>
+
+<form method="POST" action="">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+        <tr>
+            <td>Judul: </td>
+            <td><input name="title" placeholder="Title" ></td>
+        </tr>
+                
+        <tr>
+            <td>Deskripsi: </td>
+            <td><input name="description" placeholder="Description" ></td>
+        </tr>
+    </table>
+    <input type="submit" value="Tambah Task">
+</form>
+<br>
+<button><a href="{% url 'todolist:logout_user' %}">Logout</a></button>
+
+{% endblock content %}
