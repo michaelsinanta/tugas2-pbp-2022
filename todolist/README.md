@@ -64,7 +64,7 @@ Gambaran besar bagaimana cara membuat `<form>` secara manual :
 8. Membuat file forms.py dan memanipulasi class TaskForm sesuai kebutuhan input.
 9. Mengimplementasikan fungsi untuk form registrasi, login, logout, membuat task baru, menghapus task, dan mengubah status task agar pengguna dapat menggunakan todolist pada views.py.  
 10. Membuat halaman utama todolist yang memuat username pengguna, tombol Tambah Task Baru, tombol logout, serta tabel berisi tanggal pembuatan task, judul task, dan deskripsi task pada todolist.html.
-11. Membuat halaman form untuk pembuatan task dan data yang perlu dimasukkan pengguna hanyalah judul task dan deskripsi task pada create_task.html.
+11. Membuat halaman form untuk pembuatan task dan data yang perlu dimasukkan pengguna hanyalah judul task dan deskripsi task pada create_task.html. Lalu, membuat halaman untuk login pada login.html dan register user pada register.html.
 12. Membuat routing sehingga beberapa fungsi dapat diakses melalui URL berikut:
 ```python
     from django.urls import path
