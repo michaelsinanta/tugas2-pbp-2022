@@ -21,7 +21,8 @@ Gambaran besar bagaimana cara membuat `<form>` secara manual :
 2. Setelah itu, views akan membaca request dari user dan mendapatkan parameter serta value dari request POST.
 3. Input akan di-handle berdasarkan manipulasi (CRUD) yang telah diprogram pada views.py.
 4. Data tersebut akan digunakan pada template sehingga dimasukkan pada context.
-5. Selanjutya, view akan me-return hasil render dengan template dan context tersebut.
+5. Selanjutnya, view akan me-return hasil render dengan template dan context tersebut.
+6. Template akan menggunakan informasi dari context untuk ditampilkan kepada user.
 
 ### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas.
 1. Membuat sebuah django-app bernama todolist dengan perintah python manage.py startapp todolist.
