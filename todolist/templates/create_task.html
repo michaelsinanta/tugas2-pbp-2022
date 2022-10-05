@@ -1,23 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Tugas 4: Pengimplementasian Form dan Autentikasi Menggunakan Django</h1>
+<div class = "login flex w-full h-screen bg-no-repeat bg-cover bg-center flex-row"
+style="background-image: url('https://www.thespruce.com/thmb/ritGMS02HXyUlRpsQWQtvrMIjc8=/4000x3000/smart/filters:no_upscale()/organizing-a-to-do-list-2648011-hero-16c4949473354d57aab32e06a7cd619e.jpg');">
+    <div class="m-auto bg-white shadow text-gray-900 p-8 flex flex-col items-center justify-center rounded-md">
+        <h1 class="text-md font-extrabold pb-5">Tugas 4: Pengimplementasian Form dan Autentikasi Menggunakan Django</h1>
 
-<form method="POST" action="">
-    {% csrf_token %}
-    <table>
-        <tr>
-            <td>Judul: </td>
-            <td><input name="title" placeholder="Title" ></td>
-        </tr>
-        <tr>
-            <td>Deskripsi: </td>
-            <td><input name="description" placeholder="Description" ></td>
-        </tr>
-    </table>
-    <input type="submit" value="Tambah Task">
-</form>
-<br>
-<button><a href="{% url 'todolist:logout_user' %}">Logout</a></button>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div class="flex flex-col w-full">
+                <div class="flex items-center">
+                    <div class="text-md font-bold pr-5">Judul: </div>
+                    <div><input type="text" name="title" placeholder="Title" class="w-[500px] sm: w-[300px] px-2 py-2 rounded-md bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"></div>
+                </div>
+                <div class="flex items-center pt-3 pb-5">
+                    <div class="text-md font-bold pr-5">Deskripsi: </div>
+                    <div><input type="text" name="description" placeholder="Description" class="w-[470px] sm: w-[270px] px-2 py-2 rounded-md bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"></div>
+                </div>
+            </div>
+            <input type="submit" value="Tambah Task" class="w-full py-2 font-semibold bg-indigo-500 text-gray-100 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
+        </form>
+        <br>
+        <button class="bg-green-500 py-1 px-3 rounded-md"><a href="{% url 'todolist:logout_user' %}">Logout</a></button>
+    </div>
+</div>
 
 {% endblock content %}

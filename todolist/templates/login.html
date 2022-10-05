@@ -6,40 +6,47 @@
 
 {% block content %}
 
-<div class = "login">
+<div class = "login flex h-screen bg-gray-100 flex-row">
+    <div class="lg:m-0 m-auto bg-white shadow text-gray-900 p-8 flex flex-col items-center justify-center rounded-md lg:px-[200px]">
+        <h1 class="text-2xl xl:text-3xl font-extrabold pb-5">Login for ToDoList</h1>
 
-    <h1>Login</h1>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div class="pt-5">
+                <div class="flex items-center justify-center">
+                    <div class="text-md font-bold pr-5">Username: </div>
+                    <div><input type="text" name="username" placeholder="John Doe"  class="px-2 py-2 rounded-md bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"></div>
+                </div>
+                        
+                <div class="flex items-center justify-center pt-2">
+                    <div class="text-md font-bold pr-6">Password: </div>
+                    <div><input type="password" name="password" placeholder="***********" class="px-2 py-2 rounded-md bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"></div>
+                </div>
 
-    <form method="POST" action="">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <td>Username: </td>
-                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
-            </tr>
-                    
-            <tr>
-                <td>Password: </td>
-                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
-            </tr>
+                <div class="pt-5">
+                    <td><input class="w-full py-2 font-semibold bg-indigo-500 text-gray-100  rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none" type="submit" value="Login"></td>
+                </div>
+            </div>
+        </form>
 
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login"></td>
-            </tr>
-        </table>
-    </form>
-
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}     
-        
-    Belum mempunyai akun? <a href="{% url 'todolist:register' %}">Buat Akun</a>
-
+        <div class="pt-5">
+            {% if messages %}
+                <li>
+                    {% for message in messages %}
+                        <ul>{{ message }}</ul>
+                    {% endfor %}
+                </li>
+            {% endif %}   
+        </div>  
+            
+        Belum mempunyai akun? <a class="text-md text-gray-600" href="{% url 'todolist:register' %}">Buat Akun</a>
+    </div>
+    <div class="lg:flex-1 bg-indigo-100 text-center hidden lg:block lg:flex justify-center">
+        <div
+          class="w-[70%] bg-contain bg-center bg-no-repeat"
+          style="background-image: url('https://i.pinimg.com/originals/31/36/cd/3136cd447c99783f59cd1a4c7d9ca9c1.png');"
+        ></div>
+      </div>
 </div>
 
 {% endblock content %}
