@@ -1,67 +1,111 @@
 {% extends 'base.html' %}
 
+{% block meta %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $.get(window.location.href + "json/", function(data){
+            for (i = 0; i < data.length; i++){
+                getCard(data[i]);
+                deleteCard(data[i]);
+            }
+        });
+    
+        function getCard(data){
+            $("#todolist").append(
+                `
+                    <div id="${data.pk}-card" class=" bg-white border-2 shadow-lg text-gray-900 p-5 rounded-xl">
+                        <div class="flex flex-col justify-between">
+                            <div class="flex flex-row items-center justify-between ${data.fields.is_finished ? 'bg-[#bef264]' : 'bg-[#059669]'} p-3 rounded-md">
+                                <h4 class="text-lg ${data.fields.is_finished ? 'bg-[#eab308]' : 'bg-[#dcfce7]'} p-2 rounded-xl font-semibold"> ${data.fields.title} </h4>
+                                <div class = "flex w-10 h-10">
+                                    <img src="${data.fields.is_finished ? "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Sign-check-icon.png/800px-Sign-check-icon.png" : "https://www.freeiconspng.com/uploads/red-circular-image-error-0.png"}" alt="">
+                                </div>
+                            </div>
+                            <div class="flex text-sm font-light pt-1">${data.fields.is_finished ? "SELESAI" : "BELUM SELESAI"}</div>
+                            <div class="flex flex-row items-center gap-2 pt-2">
+                                <div class="w-5 h-5">
+                                <img src="https://icons.veryicon.com/png/o/internet--web/alibaba-cloud-classic-console-icon/time-and-date.png" alt="">
+                                </div>
+                                <div class="flex">${data.fields.date}</div>
+                            </div>
+                            <div class="flex pt-1 pb-7">${data.fields.description}</div>
+
+                            <div class="flex flex-row justify-end gap-2 items-center">
+                                <a class="cursor-pointer px-5 py-1 font-semibold bg-indigo-500 text-gray-100 mt-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none" href="/todolist/toggle-status/${data.pk}">Ubah</a>
+                                <a id="${data.pk}-delete" class="cursor-pointer px-5 py-1 font-semibold border-2 mt-4 rounded-lg hover:bg-green-500 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">Hapus</a>
+                            </div>
+                        </div>
+                    </div>
+                `
+            );
+        }
+
+
+        function deleteCard(data) {
+            $(`#${data.pk}-delete`).click(function () {
+                $.post(window.location.href + `delete-task/${data.pk}/`, {}).done(
+                (card) => {
+                    $(`#${data.pk}-card`).fadeOut('slow');
+                }
+                );
+            });
+        }
+
+        $("#new-task").submit(function(e){
+            e.preventDefault();
+            $.post(window.location.href + "add/", { title: $("#title").val(), description: $("#description").val(),
+            }).done(function (data) {
+                getCard(data);
+                deleteCard(data);
+                $("#title").val(""), $("#description").val("");
+                document.getElementById("todolist").insertAdjacentHTML("beforebegin", $(`#${data.pk}-card`));
+            });
+        });
+    });
+</script>
+{% endblock meta %}
+
 {% block content %}
+
+<div id="new-task" class="w-full fixed flex min-h-screen justify-center items-center bg-black bg-opacity-50 hidden -mt-10">
+  <div class="bg-white shadow-lg p-8 rounded-md">
+      <div class="flex flex-col items-center justify-center gap-5">
+        <h1 class="text-2xl font-bold">Tambah Task Baru</h1>
+        <form method="POST" id="new-task">
+          {% csrf_token %}
+          <div class="flex flex-col w-full">
+            <div class="flex items-center">
+                <div class="text-md font-bold pr-5">Judul: </div>
+                <div><input type="text" id="title" placeholder="Title" class="lg:w-[500px] sm: w-[115%] px-2 py-2 rounded-md bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"></div>
+            </div>
+            <div class="flex items-center pt-3 pb-5">
+                <div class="text-md font-bold pr-5">Deskripsi: </div>
+                <div><input type="text" id="description" placeholder="Description" class="lg:w-[470px] sm: w-[100%] px-2 py-2 rounded-md bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"></div>
+            </div>
+        </div>
+        <input type="submit" value="Tambah Task" onclick="toggleModal()" class="w-full py-2 font-semibold bg-indigo-500 text-gray-100 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
+          </div>
+        </form>
+        <a onclick="toggleModal()" class="cursor-pointer text-sm font-bold text-blue-600 underline flex w-full justify-center pt-5">Close</a>
+      </div>
+  </div>
+</div>
+
 <div class="m-10">
     <h1 class="text-2xl pb-5">Tugas 4: Pengimplementasian Form dan Autentikasi Menggunakan Django</h1>
     <h2 class="text-xl font-bold pb-5">Welcome, {{username}}</h2>
-    <div class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5"> 
-        {% for todo in list_todolist %}
-            {% if todo.is_finished %}
-                <div class=" bg-white border-2 shadow-lg text-gray-900 p-5 rounded-xl">
-                    <div class="flex flex-col justify-between">
-                        <div class="flex flex-row items-center justify-between bg-[#bef264] p-3 rounded-md">
-                            <div class="text-lg bg-[#eab308] p-2 rounded-xl font-semibold">{{todo.title}}</div>
-                            <div class = "flex w-10 h-10">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Sign-check-icon.png/800px-Sign-check-icon.png" alt="">
-                            </div>
-                        </div>
-                        <div class="flex text-sm font-light pt-1">SELESAI</div>
-                        <div class="flex flex-row items-center gap-2 pt-2">
-                            <div class="w-5 h-5">
-                            <img src="https://icons.veryicon.com/png/o/internet--web/alibaba-cloud-classic-console-icon/time-and-date.png" alt="">
-                            </div>
-                            <div class="flex">{{todo.date}}</div>
-                        </div>
-                        <div class="flex pt-1 pb-7">{{todo.description}}</div>
-
-                        <div class="flex flex-row justify-end gap-2 items-center">
-                            <button class="px-5 py-1 font-semibold bg-indigo-500 text-gray-100 mt-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"><a href="{% url 'todolist:toggle_status' todo.id %}">Ubah</a></button>
-                            <button class="px-5 py-1 font-semibold border-2 mt-4 rounded-lg hover:bg-green-500 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"><a href="{% url 'todolist:delete_task' todo.id %}">Hapus</a></button>
-                        </div>
-                    </div>
-                </div>
-            {% else %}
-            <div class=" bg-white border-2 shadow-lg  text-gray-900 p-5 rounded-xl">
-                <div class="flex flex-col justify-between">
-                    <div class="flex flex-row items-center justify-between bg-[#059669] p-3 rounded-md">
-                        <div class="text-lg bg-[#dcfce7] p-2 rounded-xl font-semibold">{{todo.title}}</div>
-                        <div class = "flex w-10 h-10">
-                            <img src="https://www.freeiconspng.com/uploads/red-circular-image-error-0.png" alt="">
-                        </div>
-                    </div>
-                    <div class="flex text-sm font-light pt-1">BELUM SELESAI</div>
-                    <div class="flex flex-row items-center gap-2 pt-2">
-                        <div class="w-5 h-5">
-                        <img src="https://icons.veryicon.com/png/o/internet--web/alibaba-cloud-classic-console-icon/time-and-date.png" alt="">
-                        </div>
-                        <div class="flex">{{todo.date}}</div>
-                    </div>
-                    <div class="flex pt-1 pb-7">{{todo.description}}</div>
-
-                    <div class="flex flex-row justify-end gap-2 items-center">
-                        <button class="px-5 py-1 font-semibold bg-indigo-500 text-gray-100 mt-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"><a href="{% url 'todolist:toggle_status' todo.id %}">Ubah</a></button>
-                        <button class="px-5 py-1 font-semibold border-2 mt-4 rounded-lg hover:bg-green-500 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"><a href="{% url 'todolist:delete_task' todo.id %}">Hapus</a></button>
-                    </div>
-                </div>
-            </div>
-            {% endif %}
-        {% endfor %}
-    </div>
+    <div id="todolist" class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
     <br>
     <div class="flex justify-center gap-10 items-center">
-        <button class="text-2xl px-5 py-1 font-semibold bg-indigo-500 text-gray-100 mt-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"><a href="{% url 'todolist:create_task' %}">Tambah Task Baru</a></button>
+        <button class="text-2xl px-5 py-1 font-semibold bg-indigo-500 text-gray-100 mt-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none" onclick="toggleModal()">Tambah Task Baru</button>
         <button class="text-2xl px-5 py-1 font-semibold border-2 mt-4 rounded-lg hover:bg-green-500 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"><a href="{% url 'todolist:logout_user' %}">Logout</a></button>
     </div>
+    <script>
+         function toggleModal() {
+            document.getElementById('new-task').classList.toggle('hidden')
+        }
+    </script>
 </div>
 
 {% endblock content %}
